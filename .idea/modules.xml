@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/admission/admission.iml" filepath="$PROJECT_DIR$/admission/admission.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway/api-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/boss/boss.iml" filepath="$PROJECT_DIR$/boss/boss.iml" />
+      <module fileurl="file://$PROJECT_DIR$/doctor/doctor.iml" filepath="$PROJECT_DIR$/doctor/doctor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/micro-docker.iml" filepath="$PROJECT_DIR$/.idea/micro-docker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/patient/patient.iml" filepath="$PROJECT_DIR$/patient/patient.iml" />
+    </modules>
+  </component>
+</project>
