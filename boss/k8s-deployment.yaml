@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment # Kubernetes resource kind we are creating
 metadata:
-  name: docker-doctor-service-k8s
+  name: docker-boss-service-k8s
 spec:
   selector:
     matchLabels:
-      app: docker-doctor-service-k8s #same for service
-  replicas: 2 # Number of replicas that will be created for this deployment
+      app: docker-boss-service-k8s #same for service
+  replicas: 1 # Number of replicas that will be created for this deployment
   template:
     metadata:
       labels:
-        app: docker-doctor-service-k8s #label must be same
+        app: docker-boss-service-k8s #label must be same
     spec:
       containers:
-        - name: docker-doctor-service-k8s
-          image: docker-doctor-service-k8s:1.0 # Image that will be used to containers in the cluster(version needed--from docker image tag)
+        - name: docker-boss-service-k8s
+          image: docker-boss-service-k8s:1.0 # Image that will be used to containers in the cluster(version needed--from docker image tag)
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8081 # The port that the container is running on in the cluster
+            - containerPort: 8761 # The port that the container is running on in the cluster
