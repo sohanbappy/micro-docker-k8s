@@ -11,7 +11,6 @@
         <module name="api-gateway" />
         <module name="boss" />
         <module name="admission" />
-        <module name="patient" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
