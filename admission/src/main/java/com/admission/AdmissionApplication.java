@@ -15,10 +15,9 @@ public class AdmissionApplication extends SpringBootServletInitializer {
 
 	@LoadBalanced
 	@Bean
-	RestTemplate getRestTemplate(RestTemplateBuilder builder){
-		return builder.build();
+	RestTemplate getRestTemplate(){
+		return new RestTemplate();
 	}
-
 
 	public static void main(String[] args) {
 		SpringApplication.run(AdmissionApplication.class, args);

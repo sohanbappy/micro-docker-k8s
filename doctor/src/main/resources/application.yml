@@ -5,3 +5,16 @@ server:
 spring:
   application:
     name: DOCTOR-SERVICE
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://192.168.49.2:31693/eureka/
+  instance:
+    instance:
+    preferIpAddress: true
+    hostname: localhost
+    ipAddr: 192.168.49.2

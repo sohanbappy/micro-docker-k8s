@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: docker-doctor-service-k8s-svc
+spec:
+  ports:
+  - port: 8081
+    protocol: TCP
+    targetPort: 8081
+  selector:
+    app: docker-doctor-service-k8s
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-doctor-service-k8s
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: docker-doctor-service-k8s
+  template:
+    metadata:
+      labels:
+        app: docker-doctor-service-k8s
+    spec:
+      containers:
+      - image: docker-doctor-service-k8s:1.0
+        imagePullPolicy: IfNotPresent
+        name: docker-doctor-service-k8s
+        ports:
+        - containerPort: 8081
