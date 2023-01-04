@@ -2,6 +2,7 @@ package com.admission.controller;
 
 import com.admission.model.Doctor;
 import com.admission.service.AdmissionService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -36,6 +37,25 @@ public class HomeController {
     @RequestMapping("/getDoctor/{Id}")
     public Doctor getDoctorById(@PathVariable("Id") int id) {
         return admissionService.getDoctor(id);
+    }
+
+    @RequestMapping("/getDoctorWithHystrix/{Id}")
+    public Doctor getDoctorByIdWithHystrix(@PathVariable("Id") int id) throws ExecutionException, InterruptedException {
+        return admissionService.getDoctorWithHystrix(id);
+    }
+
+    @RequestMapping("/getDoctorWithHystrixCommand/{Id}")
+    @HystrixCommand(fallbackMethod = "getDoctorFallBack")
+    public Doctor getDoctorByIdWithHystrixCommand(@PathVariable("Id") int id) throws ExecutionException, InterruptedException {
+        return admissionService.getDoctorWithHystrix(id);
+    }
+
+
+    /*
+        Fallbacks
+     */
+    private Doctor getDoctorFallBack(){
+        return new Doctor("someone", "01712345678", "default");
     }
 
 }
