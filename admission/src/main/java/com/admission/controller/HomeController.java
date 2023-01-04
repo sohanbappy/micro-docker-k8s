@@ -44,8 +44,8 @@ public class HomeController {
         return admissionService.getDoctorWithHystrix(id);
     }
 
-    @RequestMapping("/getDoctorWithHystrixCommand/{Id}")
     @HystrixCommand(fallbackMethod = "getDoctorFallBack")
+    @RequestMapping("/getDoctorWithHystrixCommand/{Id}")
     public Doctor getDoctorByIdWithHystrixCommand(@PathVariable("Id") int id) throws ExecutionException, InterruptedException {
         return admissionService.getDoctorWithHystrix(id);
     }
@@ -54,7 +54,8 @@ public class HomeController {
     /*
         Fallbacks
      */
-    private Doctor getDoctorFallBack(){
+    //Same method signature as like as controller
+    public Doctor getDoctorFallBack(int id){
         return new Doctor("someone", "01712345678", "default");
     }
 
