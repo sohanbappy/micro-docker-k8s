@@ -56,7 +56,7 @@ public class HomeController {
      */
     //Same method signature as like as controller
     public Doctor getDoctorFallBack(int id){
-        return new Doctor("someone", "01712345678", "default");
+        return new Doctor();
     }
 
 }

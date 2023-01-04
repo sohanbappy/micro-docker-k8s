@@ -13,12 +13,6 @@ public class Doctor {
         this.speciality = speciality;
     }
 
-    public Doctor(String name, String phone, String speciality) {
-        this.name = name;
-        this.phone = phone;
-        this.speciality = speciality;
-    }
-
     public Doctor() {
     }
 
