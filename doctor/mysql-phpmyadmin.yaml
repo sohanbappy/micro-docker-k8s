@@ -1,0 +1,73 @@
+#docker-compose -f mysql-phpmyadmin.yaml up -d
+#docker container run -p 3306:3306 --name=mysql -e MYSQL_ROOT_PASSWORD="root" mysql:8.0.27
+version: "3.7"
+
+services:
+  mysqlhost:
+    image: mysql:8.0.27
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - $HOME/hose2406101882a/database/mysql_db:/var/lib/mysql
+      - $HOME/hose2406101882a/database/backup:/backup
+    network_mode: host
+
+  adminhost:
+    image: phpmyadmin:5.2.0-apache
+    container_name: phpadmin
+    environment:
+      PMA_HOST: localhost:3306 #kubernetes host ip
+      PMA_USER: root
+      PMA_PASSWORD: root
+      APACHE_PORT: 8000
+    network_mode: host
+
+  mysqldb:
+    image: mysql:8.0.27
+    container_name: mysqldb
+    hostname: mysqldb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: appointment
+    ports:
+      - 3306:3306
+    volumes:
+      - $HOME/hose2406101882a/database/mysql_db:/var/lib/mysql
+      - $HOME/hose2406101882a/database/backup:/backup
+    networks:
+      - mysql
+    profiles:
+      - advance
+
+  dbadmin:
+    image: phpmyadmin:5.2.0-apache
+    container_name: dbadmin
+    environment:
+      PMA_HOST: localhost:3306
+      PMA_PORT: 3306 #uncomment if mysql is not on host network
+      # PMA_ARBITRARY: 1 //If you want to enter login details manually
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - 8000:80
+    depends_on:
+      - mysqldb
+    networks:
+      - mysql
+    profiles:
+      - advance
+
+networks:
+  mysql: # docker-compose-files_mysql
+    driver: bridge
+# networks: -- To use above network services in other projects add this networks property
+#  docker-compose-files_mysql: -- {{directory_name}}_{{network_name}}
+#    external: true #are you using external network?
+
+#If you face issue connecting
+# CREATE USER 'USERNAME' IDENTIFIED BY 'password';
+# GRANT ALL PRIVILEGES ON *.* TO 'USERNAME' WITH GRANT OPTION;
+# ALTER USER 'USERNAME' IDENTIFIED WITH mysql_native_password BY 'PASSWORD';
+# FLUSH PRIVILEGES;
+# ***replace USERNAME and PASSWORD only and not password
